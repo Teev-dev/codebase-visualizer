@@ -34,5 +34,10 @@ jobs:
         if: runner.os == 'Windows'
         run: npm ci
       
+      # Conditionally install dmg-license only on macOS
+      - name: Install dmg-license on macOS
+        if: runner.os == 'macOS'
+        run: npm install dmg-license
+      
       - name: Build
         run: npm run build
