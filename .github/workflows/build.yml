@@ -38,6 +38,9 @@ jobs:
       - name: Install dmg-license on macOS
         if: runner.os == 'macOS'
         run: npm install dmg-license
-      
+        
+      - name: Install dependecies
+        run: npm install
+
       - name: Build
         run: npm run build
