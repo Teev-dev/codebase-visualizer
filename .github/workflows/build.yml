@@ -19,5 +19,28 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
+      
+      # Separate steps for different OS types
+      - name: Install dependencies (Linux/Mac)
+        if: runner.os != 'Windows'
+        run: |
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            npm ci
+          else
+            npm ci --ignore-scripts
+          fi
+      
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: npm ci
+      
+      # Conditionally install dmg-license only on macOS
+      - name: Install dmg-license on macOS
+        if: runner.os == 'macOS'
+        run: npm install dmg-license
+        
+      - name: Install dependecies
+        run: npm install
+
+      - name: Build
+        run: npm run build

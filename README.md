@@ -1,6 +1,6 @@
 # Codebase Visualizer
 
-A macOS application that helps users upload, analyze, and visualize codebases with minimal technical expertise.
+A macOS application that helps users upload, analyze, and visualize codebases with minimal technical expertise..
 
 ## Overview
 
