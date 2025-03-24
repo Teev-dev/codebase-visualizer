@@ -23,7 +23,12 @@ jobs:
       # Separate steps for different OS types
       - name: Install dependencies (Linux/Mac)
         if: runner.os != 'Windows'
-        run: npm ci --ignore-scripts
+        run: |
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            npm ci
+          else
+            npm ci --ignore-scripts
+          fi
       
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
