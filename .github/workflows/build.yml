@@ -19,5 +19,15 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build
+      
+      # Separate steps for different OS types
+      - name: Install dependencies (Linux/Mac)
+        if: runner.os != 'Windows'
+        run: npm ci --ignore-scripts
+      
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: npm ci
+      
+      - name: Build
+        run: npm run build
